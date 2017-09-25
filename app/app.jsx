@@ -3,19 +3,11 @@ var React = require('react');
 var ReactDOM =require('react-dom');
 var {Route, Router, IndexRoute, hashHistory} = require('react-router');
 
+var TodoApp = require('TodoApp');
+
 //destructuring syntax to initialize multiple modules
 
-
-
-
-
-
-
-
-
 //Load foundation; style!css! loader format
-require('style!css!foundation-sites/dist/foundation.min.css'),
-$(document).foundation();
 
 //App CSS Loader
 require('style!css!sass!applicationStyles')
@@ -27,7 +19,7 @@ ReactDOM.render(
         //can add elements, classes, objects
         //Use Router component to direct page display/ Route declares a path
         //IndexRoute takes a single argument
-   <p>BoilerPlate 3 Project</p>,
+        <TodoApp/>,
    document.getElementById('app')
 );
 //two types of data in a component;

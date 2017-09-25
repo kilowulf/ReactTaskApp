@@ -7,7 +7,7 @@ var express = require('express');
 var app = express();
 
 //allows use of host env. const should be all caps by convention
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8080;
 
 //request to check for http connection(http/https);typical express middleware format
 app.use(function(req, res, next) {
