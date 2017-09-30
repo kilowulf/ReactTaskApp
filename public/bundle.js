@@ -111,7 +111,7 @@
 	//Load foundation; style!css! loader format
 
 	//App CSS Loader
-	__webpack_require__(254);
+	__webpack_require__(257);
 
 	//INITIALIZATION CODE
 
@@ -27918,7 +27918,8 @@
 	'use strict';
 
 	var React = __webpack_require__(7);
-	var TodoList = __webpack_require__(258);
+	var TodoList = __webpack_require__(254);
+	var AddTodo = __webpack_require__(256);
 	//Define App with createClass
 	var TodoApp = React.createClass({
 	    displayName: 'TodoApp',
@@ -27942,6 +27943,11 @@
 	            }]
 	        };
 	    },
+
+	    handleAddTodo: function handleAddTodo(text) {
+	        alert('new todo: ' + text);
+	    },
+
 	    render: function render() {
 	        var todos = this.state.todos;
 
@@ -27949,7 +27955,8 @@
 	        return React.createElement(
 	            'div',
 	            null,
-	            React.createElement(TodoList, { todos: todos })
+	            React.createElement(TodoList, { todos: todos }),
+	            React.createElement(AddTodo, { onAddTodo: this.handleAddTodo })
 	        );
 	    }
 	});
@@ -27960,13 +27967,123 @@
 /* 254 */
 /***/ (function(module, exports, __webpack_require__) {
 
+	'use strict';
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	var React = __webpack_require__(7);
+	var Todo = __webpack_require__(255);
+
+	var TodoList = React.createClass({
+	    displayName: 'TodoList',
+
+	    render: function render() {
+	        var todos = this.props.todos;
+
+	        var renderTodos = function renderTodos() {
+	            return todos.map(function (todo) {
+	                return (
+	                    /*{...todo}spread operator allows 
+	                    all the elements of object to be
+	                     props which are in turn retrievable.*/
+	                    React.createElement(Todo, _extends({ key: todo.id }, todo))
+	                    /*key property is necessary when iterating an array */
+
+	                );
+	            });
+	        };
+	        return React.createElement(
+	            'div',
+	            null,
+	            renderTodos()
+	        );
+	    }
+	});
+
+	module.exports = TodoList;
+
+/***/ }),
+/* 255 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React = __webpack_require__(7);
+
+	var Todo = React.createClass({
+	    displayName: 'Todo',
+
+	    render: function render() {
+	        var _props = this.props,
+	            id = _props.id,
+	            text = _props.text;
+
+
+	        return React.createElement(
+	            'div',
+	            null,
+	            id,
+	            '. ',
+	            text
+	        );
+	    }
+	});
+
+	module.exports = Todo;
+
+/***/ }),
+/* 256 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React = __webpack_require__(7);
+
+	var AddTodo = React.createClass({
+	    displayName: 'AddTodo',
+
+	    handleSubmit: function handleSubmit(e) {
+	        e.preventDefault();
+	        var todoText = this.refs.todoText.value;
+
+	        if (todoText.length > 0) {
+	            this.refs.todoText.value = '';
+	            this.props.onAddTodo(todoText);
+	        } else {
+	            this.refs.todoText.focus();
+	        }
+	    },
+	    render: function render() {
+	        return React.createElement(
+	            'div',
+	            null,
+	            React.createElement(
+	                'form',
+	                { onSubmit: this.handleSubmit },
+	                React.createElement('input', { type: 'text', ref: 'todoText', placeholder: 'what do you need to do?' }),
+	                React.createElement(
+	                    'button',
+	                    { className: 'button expanded' },
+	                    'Add Task'
+	                )
+	            )
+	        );
+	    }
+	});
+
+	module.exports = AddTodo;
+
+/***/ }),
+/* 257 */
+/***/ (function(module, exports, __webpack_require__) {
+
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(255);
+	var content = __webpack_require__(258);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(257)(content, {});
+	var update = __webpack_require__(260)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -27983,10 +28100,10 @@
 	}
 
 /***/ }),
-/* 255 */
+/* 258 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(256)();
+	exports = module.exports = __webpack_require__(259)();
 	// imports
 
 
@@ -27997,7 +28114,7 @@
 
 
 /***/ }),
-/* 256 */
+/* 259 */
 /***/ (function(module, exports) {
 
 	/*
@@ -28053,7 +28170,7 @@
 
 
 /***/ }),
-/* 257 */
+/* 260 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/*
@@ -28305,74 +28422,6 @@
 			URL.revokeObjectURL(oldSrc);
 	}
 
-
-/***/ }),
-/* 258 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-	var React = __webpack_require__(7);
-	var Todo = __webpack_require__(259);
-
-	var TodoList = React.createClass({
-	    displayName: 'TodoList',
-
-	    render: function render() {
-	        var todos = this.props.todos;
-
-	        var renderTodos = function renderTodos() {
-	            return todos.map(function (todo) {
-	                return (
-	                    /*{...todo}spread operator allows 
-	                    all the elements of object to be
-	                     props which are in turn retrievable.*/
-	                    React.createElement(Todo, _extends({ key: todo.id }, todo))
-	                    /*key property is necessary when iterating an array */
-
-	                );
-	            });
-	        };
-	        return React.createElement(
-	            'div',
-	            null,
-	            renderTodos()
-	        );
-	    }
-	});
-
-	module.exports = TodoList;
-
-/***/ }),
-/* 259 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var React = __webpack_require__(7);
-
-	var Todo = React.createClass({
-	    displayName: 'Todo',
-
-	    render: function render() {
-	        var _props = this.props,
-	            id = _props.id,
-	            text = _props.text;
-
-
-	        return React.createElement(
-	            'div',
-	            null,
-	            id,
-	            '. ',
-	            text
-	        );
-	    }
-	});
-
-	module.exports = Todo;
 
 /***/ })
 /******/ ]);
