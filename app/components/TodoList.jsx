@@ -10,7 +10,7 @@ var TodoList = React.createClass({
                     /*{...todo}spread operator allows 
                     all the elements of object to be
                      props which are in turn retrievable.*/
-                    <Todo key={todo.id} {...todo}/>
+                    <Todo key={todo.id} {...todo} onToggle={this.props.onToggle}/>
                     /*key property is necessary when iterating an array */
                 );
             });

@@ -27936,28 +27936,47 @@
 	            searchText: '',
 	            todos: [{
 	                id: uuid(),
-	                text: 'Walk the dog'
+	                text: 'Walk the dog',
+	                completed: false
 	            }, {
 	                id: uuid(),
-	                text: 'Clean the yard'
+	                text: 'Clean the yard',
+	                completed: true
 	            }, {
 	                id: uuid(),
-	                text: 'Leave mail on porch.'
+	                text: 'Leave mail on porch.',
+	                completed: true
 	            }, {
 	                id: uuid(),
-	                text: 'Chill on a video game'
+	                text: 'Chill on a video game',
+	                completed: true
 	            }]
 	        };
 	    },
 
+	    //add task to state
 	    handleAddTodo: function handleAddTodo(text) {
 	        this.setState({
 	            todos: [].concat(_toConsumableArray(this.state.todos), [{
 	                id: uuid(),
-	                text: text
+	                text: text,
+	                completed: false
 	            }])
 	        });
 	    },
+
+	    handleToggle: function handleToggle(id) {
+	        var updatedTodos = this.state.todos.map(function (todo) {
+	            if (todo.id === id) {
+	                todo.completed = !todo.completed;
+	            }
+
+	            return todo;
+	        });
+
+	        this.setState({ todos: updatedTodos });
+	    },
+
 	    handleSearch: function handleSearch(showCompleted, searchText) {
 	        this.setState({
 	            showCompleted: showCompleted,
@@ -27973,7 +27992,7 @@
 	            'div',
 	            null,
 	            React.createElement(TodoSearch, { onSearch: this.handleSearch }),
-	            React.createElement(TodoList, { todos: todos }),
+	            React.createElement(TodoList, { todos: todos, onToggle: this.handleToggle }),
 	            React.createElement(AddTodo, { onAddTodo: this.handleAddTodo })
 	        );
 	    }
@@ -27996,6 +28015,8 @@
 	    displayName: 'TodoList',
 
 	    render: function render() {
+	        var _this = this;
+
 	        var todos = this.props.todos;
 
 	        var renderTodos = function renderTodos() {
@@ -28004,7 +28025,7 @@
 	                    /*{...todo}spread operator allows 
 	                    all the elements of object to be
 	                     props which are in turn retrievable.*/
-	                    React.createElement(Todo, _extends({ key: todo.id }, todo))
+	                    React.createElement(Todo, _extends({ key: todo.id }, todo, { onToggle: _this.props.onToggle }))
 	                    /*key property is necessary when iterating an array */
 
 	                );
@@ -28024,24 +28045,28 @@
 /* 255 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 
 	var React = __webpack_require__(7);
 
 	var Todo = React.createClass({
-	    displayName: 'Todo',
+	    displayName: "Todo",
 
 	    render: function render() {
+	        var _this = this;
+
 	        var _props = this.props,
 	            id = _props.id,
-	            text = _props.text;
+	            text = _props.text,
+	            completed = _props.completed;
 
 
 	        return React.createElement(
-	            'div',
-	            null,
-	            id,
-	            '. ',
+	            "div",
+	            { onClick: function onClick() {
+	                    _this.props.onToggle(id);
+	                } },
+	            React.createElement("input", { type: "checkbox", checked: completed }),
 	            text
 	        );
 	    }
