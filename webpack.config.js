@@ -41,7 +41,8 @@ module.exports = {
         root: __dirname,
         modulesDirectories: [
             'node_modules',
-            './app/components'
+            './app/components',
+            './app/api'
         ],
         //the following where necessary to use webpack with foundation and jquery            
         modules: [
