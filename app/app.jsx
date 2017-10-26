@@ -8,6 +8,8 @@ var TodoApp = require('TodoApp');
 //destructuring syntax to initialize multiple modules
 
 //Load foundation; style!css! loader format
+require('style!css!foundation-sites/dist/foundation.min.css')
+$(document).foundation();
 
 //App CSS Loader
 require('style!css!sass!applicationStyles')

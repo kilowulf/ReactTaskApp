@@ -24,14 +24,14 @@ module.exports = {
     ],
     externals: {
         jquery: 'jQuery',
-        // foundation: 'Foundation'    
+        foundation: 'Foundation'    
 
     },
     plugins: [
         new webpack.ProvidePlugin({
             '$': 'jquery',
             'jQuery': 'jquery'
-        })
+        })        
     ],
     output: {
         path: __dirname,
@@ -52,7 +52,8 @@ module.exports = {
         ],
 
         alias: {                          
-            applicationStyles: 'app/styles/app.scss',                         
+            applicationStyles: 'app/styles/app.scss', 
+            foundation: 'foundation-sites/js/foundation.core'                        
         },
         extensions: ['', '.js', '.jsx']
     },
@@ -69,7 +70,7 @@ module.exports = {
                 },
                 test: /\.jsx?$/,
                 
-                exclude: /(node_modules|bower_components)/
+                // exclude: /(node_modules|bower_components)/
             },
             
         ]
@@ -89,7 +90,7 @@ module.exports = {
     //   test: /\.jsx?$/,
     //   enforce: "pre",
     //   loader: "eslint-loader",
-    //   exclude: /(node_modules|bower_components)/
+        //  exclude: /(node_modules|bower_components)/
     // }]
   },    
     //source-map: tool takes the original code and allows for debugging in browser

@@ -1,6 +1,12 @@
 @import "base/_variables";
 //foundation
-// @import "base/foundation-settings";
-// @import "foundation";
+// @import "settings";
+@import "base/foundation-settings";
+@import "~foundation-sites/scss/util/util";
+// @import 'foundation';
+// @import "node_modules/foundation-sites/scss"; // 
 // @include foundation-everything;
 //Components
+@import "components/container";
+@import "components/_page-title.scss";
+@import "components/todo";

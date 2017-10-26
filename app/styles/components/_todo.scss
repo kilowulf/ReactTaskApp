@@ -1,0 +1,41 @@
+.todo {
+    align-items: center;
+    cursor: pointer;
+    display: flex;
+    padding: 1rem;
+    transition: background .5s ease;
+    p,
+    input {
+        margin: 0;
+    }
+    > :first-child {
+        margin-right: 1rem;
+    }
+    &:hover {
+        background: #B0E0E6;
+    }
+}
+
+#ptext {
+    font-weight: bold;
+    font-size: 19px;
+    font-family: cursive;
+    font-variant: small-caps;
+}
+
+#dtext {
+    font-style: italic;
+    font-family: serif;
+}
+
+.todo__subtext {
+    color: #1E90FF;
+}
+
+.todo-completed {
+    p,
+    .todo-subtext {
+        color: $light-color;
+        text-decoration: line-through;
+    }
+}
